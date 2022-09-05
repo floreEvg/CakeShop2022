@@ -1,0 +1,90 @@
+﻿@page
+@model Cofetaria_Sky.Pages.RegisterModel
+@{
+
+    ViewData["Title"] = "Înregistrare";
+}
+
+
+<div id="register" style="margin-top: 76px !important; margin-left: 150px;">
+
+
+    <form method="post" style="margin-top: 100px;">
+
+        <h1><strong>Crează un cont nou</strong></h1>
+
+        <div asp-validation-summary="ModelOnly" style="color: red; font-size: 30px;"></div>
+
+        <div class="row" style="width: 100%;">
+
+            <div class="col-sm-6">
+
+                <div style="width: 400px; display: grid;">
+                    <label asp-for="RegisterPayload.LastName" style="font-size: 30px;">Nume:</label>
+                    <input type="text" id="nume" asp-for="RegisterPayload.LastName"
+                           placeholder="Introdu numele tău"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.LastName" class="text-danger" style="font-size: 30px;"></span>
+                </div>
+
+                <div style="width: 400px; display: grid;">
+                    <label style="font-size: 30px;">Prenume:</label>
+                    <input type="text" id="prenume" asp-for="RegisterPayload.FirstName"
+                           placeholder="Introdu prenumele tău"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.FirstName" class="text-danger" style="font-size: 30px;"></span>
+
+                </div>
+
+                <div style="width: 400px; display: grid;">
+                    <label style="font-size: 30px;">Email:</label>
+                    <input type="email" id="email_reg" asp-for="RegisterPayload.Email"
+                           placeholder="Introdu email-ul"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.Email" class="text-danger" style="font-size: 30px;"></span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+                <div style="width: 400px; display: grid;">
+                    <label style="font-size: 30px;">Număr de telefon:</label>
+                    <input type="tel" id="phone" asp-for="RegisterPayload.Phone"
+                           placeholder="Introdu numărul tău"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.Phone" class="text-danger" style="font-size: 30px;"></span>
+
+                </div>
+
+                <div style="width: 400px; display: grid;">
+                    <label style="font-size: 30px;">Adresă:</label>
+                    <input type="text" id="address" asp-for="RegisterPayload.Address"
+                           placeholder="Introdu adresa ta"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.Address" class="text-danger" style="font-size: 30px;"></span>
+
+                </div>
+
+                <div style="width: 400px; display: grid;">
+                    <label style="font-size: 30px;">Parolă:</label>
+                    <input type="password" id="parola_reg" asp-for="RegisterPayload.Password"
+                           placeholder="Introdu o parolă"
+                           style="font-size: 20px;">
+                    <span asp-validation-for="RegisterPayload.Password" class="text-danger" style="font-size: 30px;"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button id="creazaCont" class="btn btn-primary" type="submit" style="margin-top: 50px;">
+            <strong>Crează cont</strong>
+        </button>
+
+    </form>
+
+</div>

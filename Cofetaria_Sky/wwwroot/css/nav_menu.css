@@ -1,0 +1,98 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background: rgb(243,227,227);
+    height: auto;
+}
+
+.navbar img {
+    height: 60px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.nav-link {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: #383630;
+}
+
+.nav-link:hover {
+    color: palevioletred !important;
+    transition: 0.5s;
+    transform: translateY(-10px) !important;
+}
+
+#collapse_target{
+    padding-left: 550px;
+}
+
+@media screen and (max-width: 1500px) {
+    #collapse_target{
+        padding-left: 450px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #collapse_target {
+        padding-left: 350px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    #collapse_target {
+        padding-left: 250px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #collapse_target {
+        padding-left: 150px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #collapse_target {
+        padding-left: 30px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .navbar img{
+        padding-right: 20px;
+        padding-left: 0;
+    }  
+}
+
+@media screen and (max-width: 992px) {
+    .nav-link {
+        font-size: 20px !important;
+    }
+}
+
+/*
+    trb sa resetez margin top cand butonul e apasat invizibil
+*/
+@media screen and (min-width: 993px) {
+    #carousel {
+        margin-top: 76px !important;
+    }
+
+    #autentificare {
+        margin-top: 0px !important;
+    }
+
+    #forgot {
+        margin-top: 150px !important;
+    }
+
+    #register {
+        margin-top: 100px !important;
+    }
+}

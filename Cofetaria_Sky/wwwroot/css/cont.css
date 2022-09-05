@@ -1,0 +1,95 @@
+﻿body {
+    font-family: 'Dancing Script', cursive;
+    font-size: 35px;
+}
+
+#slide1, #slide2, #slide3, #slide4, #slide5, #slide6{
+    width: 730px !important;
+    border-bottom-right-radius: 20%;
+}
+
+@media screen and (max-width: 1130px){
+   #formular{
+       position: absolute;
+       width: 630px;
+       padding-left: 100px;
+   }
+
+   #galerie{
+       padding-left: 0px !important;
+   }
+}
+
+@media screen and (max-width: 835px) {
+    #slide1, #slide2, #slide3, #slide4, #slide5, #slide6 {
+        width: 95% !important;
+    }
+
+    #formular{
+        width: 90%;
+    }
+
+        #formular form {
+            margin-top: 90px !important;
+        }
+}
+
+@media screen and (max-width: 750px) {
+    #formular form{
+       margin-top: 90px !important;
+    }
+
+    #formular {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #page {
+        font-size: 70%;
+    }
+
+    #formular a{
+        margin-top: 0px !important;
+    }
+
+    #formular {
+        width: 80%;
+    }
+
+    .h1{
+        font-size: 35px !important;
+    }
+
+    #form_forgot{
+        margin-left: 1% !important;
+    }
+
+    #form_email {
+        margin-left: 5% !important;
+    }
+    #form_ch_pass {
+        margin-left: 5% !important;
+    }
+}
+
+
+.bg-c-lite-green {
+    background: linear-gradient(to right, #d17272, #f6c0c0 )
+}
+
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0
+}
+
+
+@media screen and (max-width: 1000px) {
+    .row{
+        display: grid;
+    }
+
+    .col-sm-5{
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+}

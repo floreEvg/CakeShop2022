@@ -1,0 +1,92 @@
+﻿@page "{id}"
+@model Cofetaria_Sky.Pages.Products.UpdateProductModel
+@{
+    if(Model.Name != null) ViewData["Title"] = "Actualizare " + Model.Name;
+
+}
+<div id="update_product" style="margin-top: 76px; width: 80%;">
+    @if (Model.Produs != null)
+    {
+        <form method="post" enctype="multipart/form-data" id="update_produs"
+              style="padding-left: 50px;
+            width: 90%; background: rgb(243,227,227, 0.2);">
+
+            <h1><strong>Actualizare produs<br />@Model.Name</strong></h1>
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 35px;">Categorie:</label>
+                <select id="select" asp-for="Category" style="font-size: 25px;">
+
+                    @if (Model.Produs.Category == "Tort")
+                    {
+                        <option value="Tort">Tort</option>
+                        <option value="Prajitura">Prăjitură</option>
+                        <option value="Patiserie">Patiserie</option>
+                    }
+                    else
+                    {
+                        if (Model.Produs.Category == "Patiserie")
+                        {
+                            <option value="Patiserie">Patiserie</option>
+                            <option value="Tort">Tort</option>
+                            <option value="Prajitura">Prăjitură</option>
+                        }
+                        else
+                        {
+                            <option value="Prajitura">Prăjitură</option>
+                            <option value="Patiserie">Patiserie</option>
+                            <option value="Tort">Tort</option>
+                        }
+                    }
+
+                </select>
+                <span asp-validation-for="Category" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 35px;">Descriere</label>
+                <textarea type="tel" asp-for="Info"
+                          style="font-size: 25px;">@Model.Produs.Info</textarea>
+                <span asp-validation-for="Info" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 35px;">Preț:</label>
+                <input type="text" asp-for="Price"
+                       placeholder="Introdu prețul"
+                       style="font-size: 25px;" value="@Model.Produs.Price">
+                <span asp-validation-for="Price" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <label style="font-size: 35px;">Imagine:</label><br />
+            <div class="custom-file" style="width: 80%;">
+                <input asp-for="Photo" class="custom-file-input form-control">
+                <label class="custom-file-label"
+                       style="padding-left: 0; font-size:25px; overflow:hidden;
+                margin-left:0; padding-right: 100px;">
+                    Încarcă
+                </label><br />
+            </div>
+
+            <div>
+                <button id="update_p" type="submit" class="btn btn-primary"><strong>Actualizează produs</strong></button>
+            </div>
+        </form>
+            }
+    </div>
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+
+                    var fullPath = $(this).val();
+                    console.log(fullPath);
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }

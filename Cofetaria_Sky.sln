@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofetaria_Sky", "Cofetaria_Sky\Cofetaria_Sky.csproj", "{DB6E74BA-CA2D-4173-987A-006EC908F7D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB6E74BA-CA2D-4173-987A-006EC908F7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6E74BA-CA2D-4173-987A-006EC908F7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6E74BA-CA2D-4173-987A-006EC908F7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6E74BA-CA2D-4173-987A-006EC908F7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {829C3C28-0088-44F9-BD00-777871D65C99}
+	EndGlobalSection
+EndGlobal

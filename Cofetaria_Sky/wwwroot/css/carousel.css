@@ -1,0 +1,29 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#carousel {
+    width: 100%;
+    height: auto;
+    margin-top: 76px;
+}
+
+.carousel-caption p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2vw;
+}
+
+
+.carousel-caption {
+    margin-bottom: 5%;
+    padding: 0;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .carousel-caption {
+        margin-bottom: 0;
+    }
+}

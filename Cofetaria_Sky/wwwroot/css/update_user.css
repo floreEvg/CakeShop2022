@@ -1,0 +1,13 @@
+﻿body {
+}
+
+@media screen and (max-width: 1000px)
+{
+    #img{
+        margin-top: 0px !important;
+    }
+
+    #add_produs{
+        width: 80% !important;
+    }
+}

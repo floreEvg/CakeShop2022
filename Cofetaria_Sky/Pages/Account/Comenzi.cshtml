@@ -1,0 +1,104 @@
+﻿@page "{current_page}"
+@model Cofetaria_Sky.Pages.Account.ComenziModel
+@{
+    ViewData["Title"] = "Comenzi";
+
+}
+<div id="comenzi" style="margin-top: 76px !important;">
+
+    <h1 style="margin-top: 100px; text-align:center;"><strong>Comenzi</strong></h1>
+
+    <div style="padding-left: 100px;">
+
+        @if (Model.Orders.Count == 0)
+        {
+            <strong>Nu există nicio comandă</strong>
+        }
+        else
+        {
+            <table class="table table-hover" style="width: 90%;">
+                <thead>
+                    <tr>
+                        <th> Data </th>
+                        <th> Adresa </th>
+                        <th> Total </th>
+                        <th> Detalii </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Orders.Count; i++)
+                    {
+                        <tr>
+                            <td> @Model.Orders[i].Date.ToShortDateString() </td>
+                            <td> @Model.Orders[i].Address </td>
+                            <td> @Model.Orders[i].Total lei </td>
+                            <td>
+                                <button style="border: none; height:30px !important; width: 30px !important; vertical-align: middle;
+                                                    font-size:initial !important; background: none;" id=@Model.Orders[i].Id onclick="detalii_comanda(id)">
+                                    <img src="~/imagini/detalii.jpg" style="width: 30px;" />
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <nav style="padding-left: 20px;">
+            <ul class="pagination fixed-bottom" style="margin-bottom: 100px; padding-left: 100px;">
+
+                @if (Model.page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Account/Comenzi/@(Model.page-1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+
+                @if (Model.count % Model.size == 0)
+                {
+                    @for (int i = 1; i <= (Model.count / Model.size); i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Account/Comenzi/@i">@i</a></li>
+                    }
+                    if (Model.page < (Model.count / Model.size))
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Account/Comenzi/@(Model.page+1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    }
+
+                }
+                else
+                {
+                    @for (int i = 1; i <= (Model.count / Model.size) + 1; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Account/Comenzi/@i">@i</a></li>
+                    }
+                    if (Model.page < (Model.count / Model.size) + 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Account/Comenzi/@(Model.page+1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function detalii_comanda(id) {
+        var string = '/Account/DetaliiComanda/' + id;
+        window.location.href = string;
+    }
+</script>

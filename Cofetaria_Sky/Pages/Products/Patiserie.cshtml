@@ -1,0 +1,93 @@
+﻿@page "{current_page}"
+@model Cofetaria_Sky.Pages.PatiserieModel
+@{
+    ViewData["Title"] = "Patiserie";
+
+}
+<div style="margin-top: 120px; text-align: center;" id="patiserie">
+    @if (Model.Patiserie == null)
+    {
+        <h1 style="text-align:center;"><strong>Nu există produse de patiserie în stoc</strong></h1>
+    }
+    else
+    {
+        <h1 style="text-align:center;"><strong>Patiserie</strong></h1>
+
+        @for (int i = 0; i < Model.Patiserie.Count; i += 3)
+        {
+            <div class="row" id="torturi" style="margin: 0;">
+                @for (int j = i; j < (i + 3) && j < Model.Patiserie.Count; j++)
+                {
+                    <div class="col" style="width: 30%;">
+                        <div class="thumbnail">
+
+                            <button id=@Model.Patiserie[j].Id type="button" onclick="info(id)">
+                                <img src=~/@Model.Patiserie[j].Image alt=@Model.Patiserie[j].Name>
+                           </button>
+                            <p><strong>@Model.Patiserie[j].Name</strong></p>
+                            <p>@Model.Patiserie[j].Price lei/100g</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <nav style="padding-left: 20px;">
+            <ul class="pagination">
+
+                @if (Model.page > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="/Products/Patiserie/@(Model.page - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                }
+
+                @if (Model.count % Model.size == 0)
+                {
+                    @for (int i = 1; i <= (Model.count / Model.size); i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Products/Patiserie/@i">@i</a></li>
+                    }
+                    if (Model.page < (Model.count / Model.size))
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Products/Patiserie/@(Model.page + 1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                               <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    }
+
+                }
+               else
+                {
+                   @for (int i = 1; i <= (Model.count / Model.size) + 1; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Products/Patiserie/@i">@i</a></li>
+                    }
+                    if (Model.page < (Model.count / Model.size) + 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/Products/Patiserie/@(Model.page + 1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </nav>
+    }
+</div>
+
+<script type="text/javascript">
+    function info(id) {
+        var string = '/Products/Produs_info/' + id;
+        window.location.href = string;
+    }
+</script>
+

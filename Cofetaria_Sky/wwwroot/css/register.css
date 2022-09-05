@@ -1,0 +1,18 @@
+﻿#creazaCont {
+    background-color: rgb(243,227,227);
+    color: #383630;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1000px){
+    #register .row{
+        display: grid !important;
+    }
+}
+
+@media screen and (max-width: 700px){
+    #register{
+        margin-left: 70px !important;
+    }
+}

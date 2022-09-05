@@ -1,0 +1,37 @@
+﻿@page "{email}"
+
+@model Cofetaria_Sky.Pages.CodResetModel
+@{
+    ViewData["Title"] = "Resetare parolă - cod";
+
+}
+<div id="reset" style="margin-top: 76px !important;">
+    <form method="post" style="margin-top: 150px; margin-left: 150px;">
+
+        <h1><strong>Resetează parola</strong></h1>
+        <p style="margin-top: 50px; font-size: 30px;">
+            Introdu codul pe care l-ai primit pe adresa ta de email.
+            <br />Dacă nu ai primit niciun email, te rugăm să ne contactezi.
+        </p>
+
+        <div asp-validation-summary="ModelOnly" style="color: red; font-size: 30px;"></div>
+
+        <div class="mb-3 mt-3" style="width: 400px;">
+            <label asp-for="Cod" class="form-label">Cod:</label>
+            <input type="text" asp-for="Cod" class="form-control" placeholder="Introdu codul" style="font-size: 20px;">
+            <span asp-validation-for="Cod" class="text-danger" style="font: 20px;"></span>
+        </div>
+
+        <div class="mb-3 mt-3" style="width: 400px;">
+            <label asp-for="Parola" class="form-label">Parola nouă:</label>
+            <input type="password" asp-for="Parola" class="form-control" placeholder="Introdu parola" style="font-size: 20px;">
+            <span asp-validation-for="Parola" class="text-danger" style="font: 20px;"></span>
+        </div>
+
+        <input type="hidden" asp-for=@Model.Email value=@Model.Email/>
+
+        <button id="cod" type="submit" class="btn btn-primary"><strong>Schimbă parola</strong></button>
+
+    </form>
+
+</div>

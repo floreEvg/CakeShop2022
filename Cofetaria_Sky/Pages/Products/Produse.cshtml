@@ -1,0 +1,170 @@
+﻿@page
+@model Cofetaria_Sky.Pages.ProduseModel
+@{
+    ViewData["Title"] = "Produse";
+}
+
+
+<div id="produse" style="margin-top: 150px; text-align: center;">
+
+    @if (Model.MyUser != null && Model.MyUser.Role == "admin")
+    {
+        <div style="margin-bottom: 50px !important;">
+            <a href="/Products/AddProduct" style="color: black; font-size: 50px; background: rgb(243,227,227, 0.7);
+                padding-left: 10px; padding-right: 10px;"><strong>Adaugă produse</strong></a>
+        </div>
+    }
+
+    @if (Model.Torturi == null && Model.Patiserie == null && Model.Prajituri == null)
+    {
+        <h1 style="text-align:center;"><strong>Nu există produse în stoc</strong></h1>
+    }
+    else
+    {
+        if (Model.Torturi != null)
+        {
+            <h1 style="text-align:center;"><strong>Torturi</strong></h1>
+
+            <div class="row" id="torturi" style="margin: 0;">
+                @foreach (var tort in Model.Torturi)
+                {
+                    <div class="col" style="width: 30%;">
+                        <div class="thumbnail">
+                            <button id=@tort.Id onclick="info(id)" type="submit">
+                                <img src=~/@tort.Image alt=@tort.Name>
+                            </button>
+                            <p><strong>@tort.Name</strong></p>
+                            <p>@tort.Price lei/kg</p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            @if (Model.Torturi.Count == 3)
+            {
+                <form>
+                    <a href="/Products/Torturi/1" style="padding-left: 20px;
+                        padding-right: 20px; border: none; text-decoration: none; color: black;
+                        border-radius:5%; background: rgba(255, 207, 207, 0.7);">
+                        Mai multe
+                    </a>
+                </form>
+            }
+        }
+
+        if (Model.Prajituri != null)
+        {
+            <h1 style="text-align:center; margin-top:80px;"><strong>Prăjituri</strong></h1>
+
+            <div class="row" id="prajituri" style="margin: 0;">
+                @foreach (var pr in Model.Prajituri)
+                {
+                    <div class="col" style="width: 30%;">
+                        <div class="thumbnail">
+                            <button id=@pr.Id onclick="info(id)">
+                                <img src=~/@pr.Image alt=@pr.Name>
+                            </button>
+                            <p><strong>@pr.Name</strong></p>
+                            <p>@pr.Price lei/100g</p>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            @if (Model.Prajituri.Count == 3)
+            {
+                <form>
+                    <a href="/Products/Prajituri/1" style="padding-left: 20px;
+                        padding-right: 20px; border: none; text-decoration: none; color: black;
+                        border-radius:5%; background: rgba(255, 207, 207, 0.7);">
+                        Mai multe
+                    </a>
+                </form>
+            }
+        }
+
+        if (Model.Patiserie != null)
+        {
+            <h1 style="text-align:center; margin-top: 80px;"><strong>Patiserie</strong></h1>
+
+            <div class="row" id="patiserii" style="margin: 0;">
+                @foreach (var pt in Model.Patiserie)
+                {
+                    <div class="col" style="width: 30%;">
+                        <div class="thumbnail">
+
+                            <button id=@pt.Id type="button" onclick="info(id)">
+                                <img src=~/@pt.Image alt=@pt.Name>
+                            </button>
+                            <p><strong>@pt.Name</strong></p>
+                            <p>@pt.Price lei/100g</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (Model.Patiserie.Count == 3)
+            {
+                <form>
+                    <a href="/Products/Patiserie/1" style="padding-left: 20px;
+                        padding-right: 20px; border: none; text-decoration: none; color: black;
+                        border-radius:5%; background: rgba(255, 207, 207, 0.7);">
+                        Mai multe
+                    </a>
+                </form>
+            }
+        }
+    }
+
+    @if (Model.Indisponibile.Count != 0 && Model.MyUser != null && Model.MyUser.Role == "admin")
+    {
+        <h1 style="text-align:center; margin-top: 80px;"><strong>Produse indisponibile</strong></h1>
+
+        <div class="row" id="indosponibil" style="margin: 0;">
+            @foreach (var pt in Model.Indisponibile)
+            {
+                <div class="col" style="width: 30%;">
+                    <div class="thumbnail">
+
+                        <button id=@pt.Id type="button" onclick="info(id)">
+                            <img src=~/@pt.Image alt=@pt.Name>
+                        </button>
+                        <p><strong>@pt.Name</strong></p>
+                        @if (pt.Category == "Tort")
+                        {
+                            <p>@pt.Price lei/kg</p>
+
+                        }
+                        else
+                        {
+                            <p>@pt.Price lei/100g</p>
+                        }
+                        
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (Model.Indisponibile.Count == 3)
+        {
+            <form>
+                <a href="/Products/Indisponibile/1" style="padding-left: 20px;
+                        padding-right: 20px; border: none; text-decoration: none; color: black;
+                        border-radius:5%; background: rgba(255, 207, 207, 0.7);">
+                    Mai multe
+                </a>
+            </form>
+        }
+    }
+</div>
+
+<script type="text/javascript">
+    function info(name) {
+        var string = '/Products/Produs_info/' + name;
+        window.location.href = string;
+    }
+</script>
+
+

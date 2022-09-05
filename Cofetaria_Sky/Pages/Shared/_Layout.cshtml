@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cofetăria Sky</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/nav_menu.css" />
+    <link rel="stylesheet" href="~/css/carousel.css" />
+    <link rel="stylesheet" href="~/css/info.css"/>
+    <link rel="stylesheet" href="~/css/optiuni.css"/>
+    <link rel="stylesheet" href="~/css/cont.css"/>
+    <link rel="stylesheet" href="~/css/resetare.css"/>
+    <link rel="stylesheet" href="~/css/register.css"/>
+    <link rel="stylesheet" href="~/css/produse.css"/>
+    <link rel="stylesheet" href="~/css/info_produs.css"/>
+    <link rel="stylesheet" href="~/css/update_user.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="nav-menu">
+            <button id="buton" class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target" 
+                    style="color: red;" onclick="menu()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a asp-area="" asp-page="/Index"><img src="~/imagini/logo.png" alt="logo"> </a>
+            <div class="collapse navbar-collapse" id="collapse_target">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Products/Produse">Produse</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Account/Cont">Contul meu</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="/Order/Cos">Coșul meu</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    @TempData["Message"]
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            window.onload = function () {
+                $('#myModal').modal({
+                    show: true
+                });
+            }
+
+        </script>
+    }
+
+    <div id="page" style="bottom: 0 !important;">
+        <main role="main" class="pb-3" style="padding: 0 !important;">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer style="height: auto">
+        <div class="navbar bg-light navbar-light fixed-bottom" style="font-family: 'Times New Roman'; font-size: 20px;">
+            &copy; 2022 - Cofetăria Sky
+            <a style="padding-right: 50px; "> Student: Evghenie Andreea - Florentina</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/nav_menu.js" asp-append-version="true"></script>
+    <script src="~/js/account.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

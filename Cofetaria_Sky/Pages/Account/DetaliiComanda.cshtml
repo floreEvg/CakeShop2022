@@ -1,0 +1,68 @@
+﻿@page "{idComanda}"
+@model Cofetaria_Sky.Pages.Account.DetaliiComandaModel
+@{
+}
+
+<div style="margin-top: 76px !important; padding-left: 50px;" id="detalii_comanda">
+
+    <h1 style="margin-top: 100px;"><strong>Comanda nr. @Model.MyOrder.Id:      @Model.MyOrder.Date.ToShortDateString()</strong></h1>
+
+    <table class="table table-hover" style="margin-top: 50px; width: 90% !important;">
+        <thead>
+            <tr>
+                <th> Produs </th>
+                <th> Imagine </th>
+                <th> Detalii </th>
+                <th> Cantitate </th>
+                <th> Preț </th>
+            </tr>
+        </thead>
+
+        <tbody>
+           @for (int i = 0; i < Model.MyProducts.Count; i++)
+            {
+                <tr id=@Model.Products[i].Id>
+                    <td> <a id=@Model.Products[i].Id onclick="info(id)" style="color: rgb(60 7 35);"> @Model.Products[i].Name </a></td>
+                    <td> <img src="~/@Model.Products[i].Image" height="100" width="100"></td>
+                    <td> @Model.MyProducts[i].Details</td>
+
+                    @if (@Model.Products[i].Category == "Tort")
+                    {
+                        <td>
+                            @(Model.MyProducts[i].Quantity/1000) kg
+                        </td>
+
+                        <td> @Model.MyProducts[i].Total lei </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Model.MyProducts[i].Quantity g
+                        </td>
+                        <td> 
+                            @Model.MyProducts[i].Total lei 
+                        </td>
+                    }
+                </tr>
+
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> <strong>Total</strong></td>
+                <td>@Model.MyOrder.Total lei</td>
+
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<script type="text/javascript">
+    function info(id) {
+        var string = '/Products/Produs_info/' + id;
+        window.location.href = string;
+    }
+    </script>

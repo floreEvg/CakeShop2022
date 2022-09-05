@@ -1,0 +1,28 @@
+﻿@page "{id}"
+@model Cofetaria_Sky.Pages.Products.DeleteProductModel
+@{
+    ViewData["Title"] = "Ștergere " + Model.Name;
+}
+<div id="delete_product">
+    <center style="margin-top: 200px;">
+        <h1><strong>Ștergere produs<br />@Model.Name</strong></h1>
+
+        <p>Sunteți sigur că doriți să ștergeți acest produs?</p>
+
+
+        <button onclick="anulare()" class="btn btn-success"><strong>Anulare</strong></button>
+
+
+
+        <form method="post">
+            <button id="stergere" type="submit" class="btn btn-warning"><strong>Ștergere produs</strong></button>
+        </form>
+    </center>
+</div>
+
+<script>
+    function anulare() {
+        var string = '/Products/Produse';
+        window.location.href = string;
+    }
+</script>

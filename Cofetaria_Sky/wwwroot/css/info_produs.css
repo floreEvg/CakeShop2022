@@ -1,0 +1,42 @@
+﻿body {
+}
+
+@media screen and (max-width:1450px)
+{
+    #produs{
+        width:100% !important;
+        max-width: 600px;
+    }
+
+    #info{
+        font-size: 30px !important;
+    }
+}
+
+
+@media screen and (max-width:999px)
+{
+   #info{
+        margin-top: 50px;
+    }
+
+    #col2 {
+        padding-left: 0px !important;
+        width: 100% !important;
+    }
+    
+    #row_info{
+        padding-left: 80px !important;
+    }
+
+    #form {
+        display: block;
+    }
+}
+
+@media screen and (max-width:700px){
+    #text{
+        width: 200px !important;
+        margin-left: 10px !important;
+    }
+}

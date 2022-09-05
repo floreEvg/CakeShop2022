@@ -1,0 +1,112 @@
+﻿@page
+@model Cofetaria_Sky.Pages.Order.ComandaModel
+@{
+    ViewData["Title"] = "Finalizare comandă";
+}
+<div id="finalizare">
+    @if (Model.MyUser != null)
+    {
+
+
+    <div class="row" style="margin: 0px; margin-top: 100px;">
+
+        <div class="col-sm" style="padding-left: 150px; width: 80%; background: rgb(243,227,227, 0.2);">
+            <form method="post" asp-page-handler="Ramburs" >
+
+                <h1><strong>Informații client</strong></h1>
+
+                <div asp-validation-summary="ModelOnly"></div>
+
+                <div style="display: grid;">
+                    <label style="font-size: 30px;">Nume: @Model.MyUser.LastName</label>
+                </div>
+
+                <div style="display: grid;">
+                    <label style="font-size: 30px;">Prenume: @Model.MyUser.FirstName</label>
+                </div>
+
+                <div style="display: grid;">
+                    <label style="font-size: 30px;">Număr de telefon: @Model.MyUser.PhoneNumber</label>
+                </div>
+
+                <div style="display: grid;">
+                    <label style="font-size: 30px;" />Adresă:
+                    <input type="text" id="address" asp-for="Address"
+                           placeholder="Introdu adresa ta"
+                           style="font-size: 25px;" value="@Model.MyUser.Address">
+                    <span asp-validation-for="Address" class="text-danger" style="font-size: 30px;"></span>
+                </div>
+
+                <div>
+                    <input asp-for="sum" type="hidden" value=@Model.sum />
+                    <button style="margin-bottom: 20px; margin-top: 20px;"
+                            type="submit" class="btn btn-primary">
+                        <strong>Plasează comanda</strong>
+                    </button>
+                </div>
+            </form>
+
+
+            <div>
+                <form method="post" asp-page-handler="Online">
+                    <input asp-for="sum" value=@Model.sum type="hidden" />
+                    <input asp-for="Address" value=@Model.MyUser.Address type="hidden" />
+
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="@Model.Key"
+                            data-amount="@(Model.sum*100/4.7)"
+                            data-name="[Cofetăria Sky]"
+                            data-description="Plată comandă"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="en"
+                            data-zip-code="false">
+                    </script>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm" style="padding-right: 100px;">
+
+            <table width="80%" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th> Produs </th>
+                        <th> Imagine </th>
+                        <th> Preț </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < Model.Products.Count; i++)
+                    {
+                        <tr id=@Model.Products[i].Id>
+                            <td> <a id=@Model.Products[i].Id style="color: rgb(60 7 35);"> @Model.Products[i].Name </a></td>
+                            <td> <img src="~/@Model.Products[i].Image" height="70" width="70"></td>
+
+
+                            @if (Model.Products[i].Category == "Tort")
+                            {
+                                <td> @(Model.Products[i].Price * Model.Quantities[i]) lei </td>  
+                            }
+                            else
+                            {
+                                <td> @(Model.Products[i].Price * Model.Quantities[i] / 100) lei </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td> <strong>Total</strong></td>
+                        <td>@Model.sum lei</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+    </div>
+    }
+</div>

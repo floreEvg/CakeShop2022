@@ -1,0 +1,132 @@
+﻿@page "{id}"
+@model Cofetaria_Sky.Pages.Produs_infoModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div id="titlu_produs">
+    @if (Model.Produs == null)
+    {
+        <center style="margin-top: 150px; margin-bottom:20px; font-size:50px;">Produs inexistent</center>
+    }
+    else
+    {
+        <center style="margin-top: 90px; margin-bottom:20px; font-size:50px;"><strong>@Model.Produs.Name</strong></center>
+        <div id="row_info" class="row" style="margin: 0; padding-left: 100px; padding-right: 50px;">
+
+            <div class="col" style="padding:0 !important; width: 40%;">
+                <img id="produs" src=~/@Model.Produs.Image style="width: 600px; border-radius:5%; padding-right: 50px;" alt=@Model.Produs.Name />
+            </div>
+            <div id="col2" class="d-flex flex-column" style="padding-top: 0; width: 55%;">
+
+                <p id="info" style=" width: 95%; background-color: rgba(255, 207, 207, 0.3);">@Model.Produs.Info</p>
+                @if (Model.Produs.Category == "Tort")
+                {
+                    <p><strong>Preț: @Model.Produs.Price lei/kg </strong></p>
+                }
+                else
+                {
+                    <p><strong>Preț: @Model.Produs.Price lei/100g </strong></p>
+                }
+
+
+                @if (Model.Produs.Stock == true)
+                {
+                    <form style="display:flex;" id="form" method="post">
+                        <div>
+                            <p style="font-size: 30px; margin-bottom: 0px;">Alegeți cantitatea:</p>
+
+                            @if (Model.Produs.Category == "Tort")
+                            {
+                                <input type="radio" asp-for="cantitate" value="1" checked="checked">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">1kg</label><br />
+
+                                <input type="radio" asp-for="cantitate" value="1.5">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">1,5kg</label><br />
+
+                                <input type="radio" asp-for="cantitate" value="2">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">2kg</label><br />
+                            }
+                            else
+                            {
+                                <input type="radio" asp-for="cantitate" value="100" checked="checked">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">100g</label><br />
+
+                                <input type="radio" asp-for="cantitate" value="250">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">250g</label><br />
+
+                                <input type="radio" asp-for="cantitate" value="500">
+                                <label asp-for="cantitate" style="font-size: 30px; margin-bottom: 0px;">500g</label><br />
+                            }
+
+                            <button id="adauga"
+                                    style="width: 200px; height: 50px; border: none; padding-left: 10px; padding-right: 10px;
+                                        border-radius: 30%; background: rgba(255, 207, 207, 0.7);"
+                                    type="submit">
+                                Adaugă în coș
+                            </button><br />
+
+                        </div>
+
+                        @if (Model.Produs.Category == "Tort")
+                        {
+                            <textarea id="text" asp-for="detalii"
+                                      style="width: 350px; height: 250px; font-size: 30px; margin-left: 50px;"
+                                      placeholder="Personalizati (mesaj, alte detalii)"></textarea>
+                        }
+
+
+                    </form>
+
+                    @if (Model.MyUser != null && Model.MyUser.Role == "admin")
+                    {
+                        <button id="@Model.Produs.Id" onclick="update(id)"
+                                style="width: 270px; height:50px; border: none; margin-top: 20px;
+                                    border-radius:30%; background: rgba(255, 207, 207, 0.7);">
+                            Actualizare produs
+                        </button>
+
+
+                        <button id="@Model.Produs.Id" onclick="deleteP(id)"
+                                style="width: 270px; height: 50px; border: none; margin-top: 20px;
+                                    border-radius: 30%; background: rgba(255, 207, 207, 0.7);">
+                            Ștergere produs
+                        </button>
+                    }
+                }
+                else
+                {
+                    <h1>Produs indisponibil</h1>
+
+                    @if (Model.MyUser != null && Model.MyUser.Role == "admin")
+                    {
+                        <form method="post" asp-page-handler="AddStock">
+                            <input type="hidden" asp-for=@Model.Produs.Id value=@Model.Produs.Id />
+
+                            <button id="@Model.Produs.Id" type="submit"
+                                style="width: 400px; height:50px; border: none; margin-top: 20px;
+                                    border-radius:30%; background: rgba(255, 207, 207, 0.7);">
+                                Adaugă produsul în stoc
+                            </button>
+                        </form>
+                    }
+                }
+
+            </div>
+        </div>
+    }
+    <div asp-validation-summary="ModelOnly" style="color: red; font-size: 30px;"></div>
+
+</div>
+
+<script>
+    function update(id) {
+        var string = '/Products/UpdateProduct/' + id;
+        window.location.href = string;
+    }
+
+    function deleteP(id) {
+        var string = '/Products/DeleteProduct/' + id;
+        window.location.href = string;
+    }
+</script>

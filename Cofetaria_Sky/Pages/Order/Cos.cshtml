@@ -1,0 +1,132 @@
+﻿@page "{handler?}"
+@model Cofetaria_Sky.Pages.Order.CosModel
+@{
+    ViewData["Title"] = "Coș";
+}
+<div id="cos">
+    <center style="margin-top: 90px; margin-bottom:20px; font-size:50px;">Coșul meu</center>
+
+    @if (Model.Products == null)
+    {
+        <center>Nu există niciun produs în coș</center>
+
+        <center>
+            <a asp-page="/Products/Produse"
+               style="color: black;
+                padding-left: 20px;
+                padding-right: 20px;
+                height:50px; border: none; border-radius:30%;
+                background: rgba(255, 207, 207, 0.7); margin-top:100px !important;">
+                Înapoi la produse
+            </a>
+        </center>
+    }
+    else
+    {
+        <div>
+            <table width="100%" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th> Produs </th>
+                        <th> Imagine </th>
+                        <th> Detalii </th>
+                        <th> Cantitate </th>
+                        <th> Preț </th>
+                        <th> Șterge </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < Model.Products.Count; i++)
+                    {
+                        <tr id=@Model.Products[i].Id>
+                            <td> <a id=@Model.Products[i].Id onclick="info(id)" style="color: rgb(60 7 35);"> @Model.Products[i].Name </a></td>
+                            <td> <img src="~/@Model.Products[i].Image" height="100" width="100"></td>
+                            <td> @Model.Details[i]</td>
+
+                            @if (Model.Products[i].Category == "Tort")
+                            {
+                                <td>
+                                    @Model.Quantities[i] kg
+                                </td>
+
+                                <td> @(Model.Products[i].Price * Model.Quantities[i]) lei </td>
+
+                                Model.sum += (Model.Products[i].Price) * (Model.Quantities[i]);
+                            }
+                            else
+                            {
+                                <td>
+                                    @Model.Quantities[i] g
+                                </td>
+                                <td> @(Model.Products[i].Price * Model.Quantities[i]/100) lei </td>
+
+                                Model.sum += (Model.Products[i].Price) * (Model.Quantities[i] / 100);
+                            }
+
+
+                            <td>
+                                <form method="post" asp-page-handler="Sterge">
+                                    <input type="hidden" name="id" value="@Model.Products[i].Id" />
+                                    <input type="hidden" name="info" value="@Model.Details[i]" />
+                                    <input type="hidden" name="cantitate" value="@Model.Quantities[i]" />
+                                    <button id="@Model.Products[i].Id"
+                                            style="border: none; height:30px !important; width: 30px !important; vertical-align: middle;
+                                            font-size:initial !important;"
+                                            type="submit">
+                                        <img src="~/imagini/cross.png" height="30" width="30" />
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> <strong>Total</strong></td>
+                        <td>@Model.sum lei</td>
+                        <td>
+                            <form method="post" asp-page-handler="StergeTot">
+                                <button style="border: none; height:30px !important; width: 30px !important; vertical-align: middle;
+                                            font-size:initial !important;"
+                                        type="submit">
+                                    <img src="~/imagini/cross.png" height="30" width="30" />
+                                </button>
+                            </form>
+                        </td>
+
+                    </tr>
+                </tfoot>
+            </table>
+
+            <a class="btn btn-success" asp-page="/Products/Produse"><strong> Înapoi la produse </strong></a>
+            <a class="btn btn-warning" id=@Model.sum onclick="comanda(id)"><strong> Finalizează comanda </strong></a>
+        </div>
+
+    }
+</div>
+
+<script type="text/javascript">
+    function info(id) {
+        var string = '/Products/Produs_info/' + id;
+        window.location.href = string;
+    }
+
+    function comanda(sum) {
+        if (sum < 40) {
+            alert("Comanda trebuie sa fie de minim 40 de lei");
+        }
+        else {
+            var string = '/Order/Comanda';
+            window.location.href = string;
+        }
+        
+    }
+</script>
+
+

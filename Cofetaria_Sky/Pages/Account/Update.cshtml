@@ -1,0 +1,106 @@
+﻿@page
+@model Cofetaria_Sky.Pages.Account.UpdateModel
+@{
+    ViewData["Title"] = "Actualizare cont";
+
+}
+
+<div id="update" class="row" style="width: 100%; margin-bottom: 0; margin-top: 76px !important;">
+    <div class="col-sm" style="width: 100%;">
+
+        <center id="galerie" style="padding-left: 0px !important; padding-top: 50px;
+            display: block;">
+            @if (Model.MyUser.Image == null)
+            {
+                <img id="img" src="/imagini/avatar.png" style="border-radius: 50%;
+                    margin-top: 10%;
+                    width: 500px;" alt="User-Profile-Image"><br />
+            }
+            else
+            {
+                    <div class="thumbnail" style="border-radius: 50%; margin-top: 10%; width: 500px; height: 500px; overflow: hidden !important;">
+                        <img id="img" src="~/imagini/profil/@Model.MyUser.Image"
+                             style="width: 500px; height: 100%; overflow: hidden !important;" alt="User-Image"><br />
+                    </div>
+            }
+        </center>
+
+    </div>
+
+    <div class="col-sm">
+
+        <form method="post" enctype="multipart/form-data"
+              style="margin-top: 10px; padding-left: 50px;
+                width: 80%; background: rgb(243,227,227, 0.2);">
+
+            <h1><strong>Actualizare cont</strong></h1>
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 40px;">Nume:</label>
+                <input type="text" id="nume" asp-for="LastName"
+                       placeholder="Introdu numele tău"
+                       style="font-size: 25px;" value="@Model.MyUser.LastName">
+                <span asp-validation-for="LastName" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 40px;">Prenume:</label>
+                <input type="text" id="prenume" asp-for="FirstName"
+                       placeholder="Introdu prenumele tău"
+                       style="font-size: 25px;" value="@Model.MyUser.FirstName">
+                <span asp-validation-for="FirstName" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 40px;">Număr de telefon:</label>
+                <input type="tel" id="phone" asp-for="Phone"
+                       placeholder="Introdu numărul tău"
+                       style="font-size: 25px;" value="@Model.MyUser.PhoneNumber">
+                <span asp-validation-for="Phone" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <div style="width: 80%; display: grid;">
+                <label style="font-size: 40px;">Adresă:</label>
+                <input type="text" id="address" asp-for="Address"
+                       placeholder="Introdu adresa ta"
+                       style="font-size: 25px;" value="@Model.MyUser.Address">
+                <span asp-validation-for="Address" class="text-danger" style="font-size: 30px;"></span>
+            </div>
+
+            <label style="font-size: 40px;">Imagine:</label><br />
+            <div class="custom-file" style="width: 80%;">
+                <input asp-for="Photo" class="custom-file-input form-control">
+                <label class="custom-file-label"
+                       style="padding-left: 0; font-size:25px; overflow:hidden;
+                    margin-left:0; padding-right: 100px;">
+                    Încarcă
+                </label><br />
+            </div>
+
+            <div>
+                <button id="actualizare" type="submit" class="btn btn-primary"><strong>Actualizează</strong></button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+
+                var fullPath = $(this).val();
+                console.log(fullPath);
+                $(this).next('.custom-file-label').html(fileName);
+
+                $(this).next('#img').html(fullPath);
+
+                //cu url.action
+            });
+        });
+    </script>
+}
